@@ -48,16 +48,22 @@
    <nav class="navbar navbar-dark bg-dark justify-content-between">
      <a class="navbar-brand">BoolFlix</a>
      <form class="form-inline">
-       <input class="form-control mr-sm-2" type="search" placeholder="Search a movie" aria-label="Search">
-       <button class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>
+       <input class="form-control mr-sm-2" type="search" placeholder="Search a movie" aria-label="Search" v-model='initValue'>
+       <button class="btn btn-dark my-2 my-sm-0" type="submit" @click="searchMovie()">Search</button>
      </form>
    </nav>
   </header>
   <!-- /header -->
 
   <!-- main -->
-  <main>
-
+  <main class="flex">
+    <div class="movie_card flex column" v-for="(movie, index) in movieList">
+      <img src="" alt="">
+      <h3 class="title">{{movieList[index].title}}</h3>
+      <span class="original_title">{{movieList[index].original_title}}</span>
+      <span class="original_language">{{movieList[index].original_language}}</span>
+      <span class="vote_count">{{movieList[index].vote_count}}</span>
+    </div>
 
   </main>
   <!-- /main -->
