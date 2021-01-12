@@ -62,7 +62,13 @@
       <h3 class="title">{{movieList[index].title}}</h3>
       <span class="original_title">{{movieList[index].original_title}}</span>
       <span class="original_language">{{movieList[index].original_language}}</span>
-      <span class="vote_count">{{movieList[index].vote_count}}</span>
+      <span class="vote_average">{{movieList[index].vote_average}}</span>
+      <div class="flex">
+        <i class="fas fa-star" v-for="n in movieList[index].vote_average"></i>
+        <i class="far fa-star" v-for="n in (movieList[index].max_vote - movieList[index].vote_average)"></i>
+
+        
+      </div>
     </div>
 
   </main>

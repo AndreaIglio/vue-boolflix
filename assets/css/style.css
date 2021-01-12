@@ -24,6 +24,7 @@
 
 /* header */
 
+
 .navbar-brand {
   color: red !important;
 }
@@ -36,14 +37,27 @@
 main{
   width: 100vw;
   flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .movie_card {
 
   width: calc(100%/6);
   align-items: center;
-  margin: 0px 5px;
+  justify-content: space-evenly;
+  margin: 5px;
+  border: 2px solid black;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #343A40;
+  color: white;
+  height: 200px;
   
+}
+
+.stars {
+  justify-content: center;
 }
 /* /main */
 
