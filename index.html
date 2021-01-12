@@ -61,6 +61,13 @@
       <img src="" alt="">
       <h3 class="title">{{movieList[index].title}}</h3>
       <span class="original_title">{{movieList[index].original_title}}</span>
+      <!-- <img :src="enIcon" alt="" style="width: 30px;" v-if="movieList[index].original_language == 'en'"> -->
+      <!-- <img :src="itaIcon" alt="" style="width: 30px;"v-if="movieList[index].original_language == 'it'"> -->
+      <img :src="`./assets/img/original_language/${movie.original_language}.jpg`" alt="" style="width: 30px;">
+      
+
+
+
       <span class="original_language">{{movieList[index].original_language}}</span>
       <span class="vote_average">{{movieList[index].vote_average}}</span>
       <div class="flex">
