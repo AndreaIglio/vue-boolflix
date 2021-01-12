@@ -23,83 +23,82 @@
   <!-- /mediaquery -->
 
 
-  <!-- JQuery --> 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- JQuery -->
+  <scrip src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></scrip>
   <!-- /JQuery -->
 
 
   <!-- fontawesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+    crossorigin="anonymous" />
   <!-- /fontawesome -->
 
 
   <!-- google font -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
   <!-- /google font -->
 
-  <title>Document</title>
+  <title>Boolflix</title>
 </head>
 
 <body>
 
   <div class="wrapper flex column" id="root">
-  <!-- header -->
-  <header>
-   <nav class="navbar navbar-dark bg-dark justify-content-between">
-     <a class="navbar-brand">BoolFlix</a>
-     <form class="form-inline">
-       <input class="form-control mr-sm-2" type="search" placeholder="Search a movie" aria-label="Search" v-model='initValue'>
-       <button class="btn btn-dark my-2 my-sm-0" type="submit" @click="searchMovie()">Search</button>
-     </form>
-   </nav>
-  </header>
-  <!-- /header -->
+    <!-- header -->
+    <header>
+      <nav class="navbar navbar-dark bg-dark justify-content-between">
+        <a class="navbar-brand">BoolFlix</a>
+        <form class="form-inline" @submit.prevent="add()">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search a movie" v-model='initValue'>
+          <button class="btn btn-dark my-2 my-sm-0" @click="searchMovie()">Search</button>
+        </form>
+      </nav>
+    </header>
+    <!-- /header -->
 
-  <!-- main -->
-  <main class="flex">
-    <div class="movie_card flex column" v-for="(movie, index) in searchList">
-      <img src="" alt="">
-      <h3 class="title">{{searchList[index].title}}</h3>
-      <span class="type">{{searchList[index].type}}</span>
-      <span class="original_title">{{searchList[index].original_title}}</span>
-      <!-- added icons to the movie_card -->
-      <img :src="`./assets/img/original_language/${movie.original_language}.jpg`" alt="" style="width: 30px;">
-      <!-- /added icons to the movie card -->
-      <span class="original_language">{{searchList[index].original_language}}</span>
-      <span class="vote_average">{{searchList[index].vote_average}}</span>
-      <div class="flex">
-        <i class="fas fa-star" v-for="n in searchList[index].vote_average"></i>
-        <i class="far fa-star" v-for="n in (searchList[index].max_vote - searchList[index].vote_average)"></i>
+    <!-- main -->
+    <main class="flex">
+      <div class="movie_card flex column" v-for="(movie, index) in searchList">
+        <img src="" alt="">
+        <h3 class="title">{{searchList[index].title}}</h3>
+        <span class="type">{{searchList[index].type}}</span>
+        <span class="original_title">{{searchList[index].original_title}}</span>
+        <!-- added icons to the movie_card -->
+        <img :src="`./assets/img/original_language/${movie.original_language}.jpg`" alt="" style="width: 30px;">
+        <!-- /added icons to the movie card -->
+        <span class="original_language">{{searchList[index].original_language}}</span>
+        <span class="vote_average">{{searchList[index].vote_average}}</span>
+        <div class="flex">
+          <i class="fas fa-star" v-for="n in searchList[index].vote_average"></i>
+          <i class="far fa-star" v-for="n in (searchList[index].max_vote - searchList[index].vote_average)"></i>
 
-        
+
+        </div>
       </div>
-    </div>
 
-  </main>
-  <!-- /main -->
+    </main>
+    <!-- /main -->
 
 
-  <!-- footer -->
-  <footer>
+    <!-- footer -->
+    <footer>
 
-  </footer>
-  <!-- /footer -->
+    </footer>
+    <!-- /footer -->
   </div>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    <!-- Axios -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
-      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
-      crossorigin="anonymous"></script>
-    <!-- /Axios -->
+  <!--  Vue Js  -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <!-- /Vue Js -->
 
-    <!--  Vue Js  -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <!-- /Vue Js -->
-
-    <!-- JS script -->
-    <script type="text/javascript" src="assets/js/script.js">
-    </script>
-    <!-- /JS script -->
+  <!-- JS script -->
+  <script type="text/javascript" src="assets/js/script.js">
+  </script>
+  <!-- /JS script -->
 
 
 </body>
