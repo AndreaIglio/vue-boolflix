@@ -57,22 +57,19 @@
 
   <!-- main -->
   <main class="flex">
-    <div class="movie_card flex column" v-for="(movie, index) in movieList">
+    <div class="movie_card flex column" v-for="(movie, index) in searchList">
       <img src="" alt="">
-      <h3 class="title">{{movieList[index].title}}</h3>
-      <span class="original_title">{{movieList[index].original_title}}</span>
-      <!-- <img :src="enIcon" alt="" style="width: 30px;" v-if="movieList[index].original_language == 'en'"> -->
-      <!-- <img :src="itaIcon" alt="" style="width: 30px;"v-if="movieList[index].original_language == 'it'"> -->
+      <h3 class="title">{{searchList[index].title}}</h3>
+      <span class="type">{{searchList[index].type}}</span>
+      <span class="original_title">{{searchList[index].original_title}}</span>
+      <!-- added icons to the movie_card -->
       <img :src="`./assets/img/original_language/${movie.original_language}.jpg`" alt="" style="width: 30px;">
-      
-
-
-
-      <span class="original_language">{{movieList[index].original_language}}</span>
-      <span class="vote_average">{{movieList[index].vote_average}}</span>
+      <!-- /added icons to the movie card -->
+      <span class="original_language">{{searchList[index].original_language}}</span>
+      <span class="vote_average">{{searchList[index].vote_average}}</span>
       <div class="flex">
-        <i class="fas fa-star" v-for="n in movieList[index].vote_average"></i>
-        <i class="far fa-star" v-for="n in (movieList[index].max_vote - movieList[index].vote_average)"></i>
+        <i class="fas fa-star" v-for="n in searchList[index].vote_average"></i>
+        <i class="far fa-star" v-for="n in (searchList[index].max_vote - searchList[index].vote_average)"></i>
 
         
       </div>
