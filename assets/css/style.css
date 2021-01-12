@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing:border-box;
+}
+
+/* utility */
+
+.wrapper {
+  width: 100vw;
+}
+
+.flex {
+  display: flex;
+}
+.column {
+  flex-direction: column;
+}
+
+/* /utility */
+
+
+/* header */
+
+.navbar {
+  padding: 8px 350px;
+}
+
+.navbar-brand {
+  color: red !important;
+}
+
+/* /header */
+
+
+
+/* main */
+
+/* /main */
+
+
+
+/* footer */
+
+/* /footer */
