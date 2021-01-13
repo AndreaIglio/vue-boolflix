@@ -38,10 +38,12 @@ header {
 .navbar {
   width: 100vw;
   position: fixed;
+  z-index: 2;
 }
 
 .navbar-brand {
   color: red !important;
+  font-size: 25px;
 }
 
 /* /header */
