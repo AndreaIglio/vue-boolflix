@@ -4,6 +4,7 @@ let app = new Vue({
     initValue: "",
     searchList: [],
     imageUrl: "https://image.tmdb.org/t/p/w342",
+    castListName: [],
   },
   methods: {
     searchMovie: function () {
@@ -17,7 +18,7 @@ let app = new Vue({
           // I bind to our searchList the response from the database.
 
           this.searchList = response.data.results;
-          console.log(response.data.results);
+          // console.log(response.data.results);
 
           // To each element of our searchList i create a variable vote which i bind the value with math.ceil method
           this.searchList.forEach((element) => {
@@ -37,11 +38,35 @@ let app = new Vue({
             
             axios
               .get(
-                `
-              https://api.themoviedb.org/3/movie/${element.id}/credits?api_key=ddf88c3ce2b6d4e123fdc23f9bae3d52&language=en-US`
-              )
+                `https://api.themoviedb.org/3/movie/${element.id}/credits?api_key=ddf88c3ce2b6d4e123fdc23f9bae3d52&language=en-US`)
               .then((response) => {
-                console.log(response);
+                // console.log(response.data.cast);
+                let castListName = response.data.cast.slice(0,5);
+                console.log(castListName);
+                console.log(this.searchList);
+
+                let namesActorList = [];
+
+                castListName.forEach(element=> {
+                  namesActorList.push(element.name)
+                })
+
+                console.log(namesActorList);
+
+          
+                 this.searchList.forEach((element) => {
+                 element.actor1 = namesActorList[0];
+                 element.actor2 = namesActorList[1];
+                 element.actor3 = namesActorList[2];
+                 element.actor4 = namesActorList[3];
+                 element.actor5 = namesActorList[4];
+                
+                });
+                
+
+                  console.log(this.searchList);
+
+              
               });
 
 
