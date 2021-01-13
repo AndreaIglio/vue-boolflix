@@ -51,7 +51,7 @@
     <header>
       <nav class="navbar navbar-dark bg-dark justify-content-between">
         <a class="navbar-brand">BoolFlix</a>
-        <form class="form-inline" @submit.prevent="add()">
+        <form class="form-inline" @submit.prevent="">
           <input class="form-control mr-sm-2" type="search" placeholder="Search a movie" v-model='initValue'>
           <button class="btn btn-dark my-2 my-sm-0" @click="searchMovie()">Search</button>
         </form>
@@ -62,7 +62,7 @@
     <!-- main -->
     <main class="flex">
       <div class="movie_card flex column" v-for="(movie, index) in searchList">
-        <img src="" alt="">
+        <img :src="searchList[index].poster_path" alt="">
         <h3 class="title">{{searchList[index].title}}</h3>
         <span class="type">{{searchList[index].type}}</span>
         <span class="original_title">{{searchList[index].original_title}}</span>
