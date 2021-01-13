@@ -48,7 +48,7 @@
 
   <div class="wrapper flex column" id="root">
     <!-- header -->
-    <header>
+    <header class="flex">
       <nav class="navbar navbar-dark bg-dark justify-content-between">
         <a class="navbar-brand">BoolFlix</a>
         <form class="form-inline" @submit.prevent="">
@@ -63,21 +63,19 @@
     <main class="flex">
       <div class="movie_card flex column" v-for="(movie, index) in searchList"
         :style="{ backgroundImage: 'url(' + searchList[index].poster_path + ')' }">
-
+      <div class="overlay flex column">
         <h3 class="title">{{searchList[index].title}}</h3>
         <span class="type">{{searchList[index].type}}</span>
         <span class="original_title">{{searchList[index].original_title}}</span>
         <!-- added icons to the movie_card -->
-        <img :src="`./assets/img/original_language/${movie.original_language}.jpg`" alt="" style="width: 30px;">
+        <img :src="`./assets/img/original_language/${movie.original_language}.png`" alt="" style="width: 30px;">
         <!-- /added icons to the movie card -->
-        <span class="original_language">{{searchList[index].original_language}}</span>
-        <span class="vote_average">{{searchList[index].vote_average}}</span>
-        <div class="flex">
+        <div class="stars">
+          <span>Vote: </span>
           <i class="fas fa-star" v-for="n in searchList[index].vote_average"></i>
           <i class="far fa-star" v-for="n in (searchList[index].max_vote - searchList[index].vote_average)"></i>
-
-
         </div>
+        <span v-if="searchList[index].overview != ''">{{ 'OVERVIEW: ' + searchList[index].overview}}</span>
       </div>
 
     </main>
