@@ -3,7 +3,7 @@ let app = new Vue({
   data: {
     initValue: "",
     searchList: [],
-    imageUrl: "https://image.tmdb.org/t/p/w185",
+    imageUrl: "https://image.tmdb.org/t/p/w342",
   },
   methods: {
     searchMovie: function () {
@@ -25,8 +25,13 @@ let app = new Vue({
             element.vote_average = vote;
             // Creating a property to every of our object to be able to have a maximum of stars
             element.max_vote = 5;
+
+            // Milestone 3
+            // i create a variable to assign the value of poster_path property, then i assign to the element.poster_path the value of the standardize imageUrl + the element.poster_path value
+
             let coverImg = element.poster_path;
-            element.poster_path = `${this.imageUrl}${coverImg}`
+            element.poster_path = `${this.imageUrl}${coverImg}`;
+          
             // element.poster_path = `${this.imageUrl} element.poster_path`;
           });
           //   console.log(this.searchList);
@@ -50,7 +55,7 @@ let app = new Vue({
 
              let coverImg = element.poster_path;
              element.poster_path = `${this.imageUrl}${coverImg}`;
-
+          
             // console.log(element);
             //Push new objects into the array, not to get the error i need already to push them with the standard proprierties of searchList[], otherway it reminds as that the array length has some error
 

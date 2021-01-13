@@ -42,7 +42,7 @@ main{
 
 .movie_card {
 
-  width: calc(100%/6);
+  width: 342px;
   align-items: center;
   justify-content: space-evenly;
   margin: 5px;
@@ -52,12 +52,15 @@ main{
   text-align: center;
   background-color: #343A40;
   color: white;
-  height: 200px;
-  
+  height: 513px;
 }
 
 .stars {
   justify-content: center;
+}
+
+.bg-image {
+  back
 }
 /* /main */
 
