@@ -17,6 +17,7 @@ let app = new Vue({
           // I bind to our searchList the response from the database.
 
           this.searchList = response.data.results;
+          console.log(response.data.results);
 
           // To each element of our searchList i create a variable vote which i bind the value with math.ceil method
           this.searchList.forEach((element) => {
@@ -31,8 +32,19 @@ let app = new Vue({
 
             let coverImg = element.poster_path;
             element.poster_path = `${this.imageUrl}${coverImg}`;
-          
-            // element.poster_path = `${this.imageUrl} element.poster_path`;
+            
+            // Milestone 5
+            
+            axios
+              .get(
+                `
+              https://api.themoviedb.org/3/movie/${element.id}/credits?api_key=ddf88c3ce2b6d4e123fdc23f9bae3d52&language=en-US`
+              )
+              .then((response) => {
+                console.log(response);
+              });
+
+
           });
           //   console.log(this.searchList);
         });
@@ -46,7 +58,7 @@ let app = new Vue({
         .then((response) => {
           //   console.log(response.data.results);
           let tvShows = response.data.results;
-          console.log(tvShows);
+          // console.log(tvShows);
           tvShows.forEach((element) => {
 
  
