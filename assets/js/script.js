@@ -33,45 +33,59 @@ let app = new Vue({
 
             let coverImg = element.poster_path;
             element.poster_path = `${this.imageUrl}${coverImg}`;
-            
+
+            let actorName = [];
             // Milestone 5
             
             axios
               .get(
-                `https://api.themoviedb.org/3/movie/${element.id}/credits?api_key=ddf88c3ce2b6d4e123fdc23f9bae3d52&language=en-US`)
+                `https://api.themoviedb.org/3/movie/${element.id}/credits?api_key=ddf88c3ce2b6d4e123fdc23f9bae3d52&language=en-US`
+              )
               .then((response) => {
+                // OPZIONE 1
                 // console.log(response.data.cast);
-                let castListName = response.data.cast.slice(0,5);
-                console.log(castListName);
-                console.log(this.searchList);
+                // this.castListName = response.data.cast.slice(0, 5);
+                // // console.log(this.castListName);
 
-                let namesActorList = [];
+                // for (let i = 0; i < this.castListName.length; i++) {
+                //   console.log(this.castListName[i].name);
+                //   this.castListName[i];
+                //   element["actor" + i] = this.castListName[i].name;
+                // }
 
-                castListName.forEach(element=> {
-                  namesActorList.push(element.name)
-                })
+                // OPZIONE 2
+                for (let i = 0; i < 5; i++) {
+                  // console.log(response.data.cast[i].name);
+                  
+                  actorName.push(response.data.cast[i].name);
+                }
 
-                console.log(namesActorList);
+                console.log(actorName);
 
-          
-                 this.searchList.forEach((element) => {
-                 element.actor1 = namesActorList[0];
-                 element.actor2 = namesActorList[1];
-                 element.actor3 = namesActorList[2];
-                 element.actor4 = namesActorList[3];
-                 element.actor5 = namesActorList[4];
-                
-                });
-                
 
-                  console.log(this.searchList);
+                //OPZIONE 3
+                //   let actorName = [];
 
-              
+                //   for (let i = 0; i < this.castListName.length; i++) {
+                //     console.log(this.castListName[i].name);
+                //     this.castListName[i];
+                //     // element["actor" + i] = this.castListName[i].name;
+                //     actorName.push(this.castListName[i].name);
+                //     // console.log(actorName);
+
+                //     this.actorName = actorName;
+                //   }
+                //   console.log(actorName);
+                //   console.log(this.actorName);
               });
 
+              console.log(actorName);
+              
+              element.actor = actorName;
+              console.log(element.actor);
 
+            //   console.log(this.searchList);
           });
-          //   console.log(this.searchList);
         });
 
       // Milestone 2 (add tv shows to the list)
@@ -83,20 +97,22 @@ let app = new Vue({
         .then((response) => {
           //   console.log(response.data.results);
           let tvShows = response.data.results;
+
+          
+
           // console.log(tvShows);
           tvShows.forEach((element) => {
 
- 
+
             // Milestone 3
             // i create a variable to assign the value of poster_path property, then i assign to the element.poster_path the value of the standardize imageUrl + the element.poster_path value
 
-             let coverImg = element.poster_path;
-             element.poster_path = `${this.imageUrl}${coverImg}`;
-          
+            let coverImg = element.poster_path;
+            element.poster_path = `${this.imageUrl}${coverImg}`;
+
+            
             // console.log(element);
             //Push new objects into the array, not to get the error i need already to push them with the standard proprierties of searchList[], otherway it reminds as that the array length has some error
-
-           
 
             console.log(element);
             this.searchList.push({
@@ -113,5 +129,8 @@ let app = new Vue({
           //   console.log(this.searchList);
         });
     },
+  },
+  beforeUpdate() {
+    actorName = [];
   },
 });

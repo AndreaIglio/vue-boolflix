@@ -67,13 +67,10 @@
            <li class="nav-item">
              <a class="nav-link" href="#">TV show</a>
            </li>
-           <li class="nav-item">
-             <a class="nav-link" href="#">TV show</a>
-           </li>
          </ul>
           <form class="form-inline" @submit.prevent="">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" v-model='initValue'>
-            <button class="btn btn-dark my-2 my-sm-0" @click="searchMovie()">Search</button>
+            <button class="btn btn-dark my-2 my-sm-0" @click="searchMovie()" @change='searchMovie()'>Search</button>
           </form>
        </div>
      </nav>
@@ -98,11 +95,19 @@
           <i class="far fa-star" v-for="n in (searchList[index].max_vote - searchList[index].vote_average)"></i>
         </div>
         <span v-if="searchList[index].overview != ''">{{ 'OVERVIEW: ' + searchList[index].overview}}</span>
+
+      <!-- opzione 1 -->
+        <!-- <span>Actors: {{searchList[index].actor0}}</span>
         <span>{{searchList[index].actor1}}</span>
         <span>{{searchList[index].actor2}}</span>
         <span>{{searchList[index].actor3}}</span>
-        <span>{{searchList[index].actor4}}</span>
-        <span>{{searchList[index].actor5}}</span>
+        <span>{{searchList[index].actor4}}</span> -->
+        <!-- /opzione 1 -->
+          <span v-for="(item, index) in movie.actor" :key="index">
+            {{item}}
+          </span>
+        
+        <!-- <span v-for="(actor, index) in actorName" :key="index">{{actor}}</span> -->
 
       </div>
 
