@@ -9,13 +9,29 @@ let app = new Vue({
   },
   methods: {
     search: function () {
+      // GenreMovie
+      axios
+        .get(
+          `https://api.themoviedb.org/3/genre/movie/list?api_key=ddf88c3ce2b6d4e123fdc23f9bae3d52&language=en-US`
+        )
+        .then((response) => {
+          console.log(response.data.genres);
+          this.genreMovie = response.data.genres;
+          console.log(this.genreMovie);
+        });
+
+      // /GenreMovie
+
+
+
+
+      // Movie 
+
       axios
         .get(
           `https://api.themoviedb.org/3/search/movie?api_key=ddf88c3ce2b6d4e123fdc23f9bae3d52&language=en-US&&query=${this.initValue}&page=1&include_adult=false`
         )
         .then((response) => {
-        
-
           // Milestone 1,2 (add stars to show the vote_average)
 
           // I bind to our searchList the response from the database.
@@ -63,14 +79,41 @@ let app = new Vue({
             // console.log(searchListParsed);
 
             // console.log(element.genre_ids);
+            console.log(element);
+            console.log(element.genre_ids);
 
-         
+            for(let v=0; v< this.genreMovie.length; v++){
+
+            //  console.log(this.genreMovie[v].name);
+            //  console.log(this.genreMovie[v].id);
+
+             for(let u=0; u < element.genre_ids.length; u++){
+              //  console.log(element.genre_ids[u]);
+               if(element.genre_ids[u] == this.genreMovie[v].id){
+                //  console.log(element.genre_ids[u]);
+                
+                //QUESTO LOG SOTTO E' IL NOME DEI GENERI CHE CORRISPONDONO NELLA LSITA DI TUTTI I GENERI
+                
+                //QUESTO VALORE SARA' IL VALORE CHE DEVO STAMPARE SOTTO FORMA DI PROPRIETA' GENERE1, GENERE2 al nostro element!!!
+                console.log(this.genreMovie[v].name);
+               }
+               
+             }
+
+            }
+
+
           });
 
         });
 
-      // Milestone 2 (add tv shows to the list)
+        // /Movie
 
+
+
+      //TvShow
+
+      // Milestone 2 (add tv shows to the list)
       axios
         .get(
           `https://api.themoviedb.org/3/search/tv?api_key=ddf88c3ce2b6d4e123fdc23f9bae3d52&language=it_IT&query=${this.initValue}`
@@ -132,19 +175,9 @@ let app = new Vue({
           //   console.log(this.searchList);
         });
 
-        console.log(this.searchList);
+      // /TvShow 
+      console.log(this.searchList);
       // console.log(this.searchList);
-
-
-      axios.get(
-        `https://api.themoviedb.org/3/genre/movie/list?api_key=ddf88c3ce2b6d4e123fdc23f9bae3d52&language=en-US`
-      ).
-      then(response => {
-        console.log(response.data.genres);
-        this.genreMovie = response.data.genres;
-        console.log(this.genreMovie);
-      })
-      ;
     },
 
   },
