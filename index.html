@@ -86,9 +86,7 @@
 
         <span class="type">{{searchList[index].type}}</span>
         <span class="original_title">{{searchList[index].original_title}}</span>
-        <!-- added icons to the movie_card -->
         <img :src="`./assets/img/original_language/${movie.original_language}.png`" alt="" style="width: 30px;">
-        <!-- /added icons to the movie card -->
         <div class="stars">
           <span>Vote: </span>
           <i class="fas fa-star" v-for="n in searchList[index].vote_average"></i>
@@ -97,15 +95,13 @@
         <span v-if="searchList[index].overview != ''">{{ 'OVERVIEW: ' + searchList[index].overview}}</span>
 
       <!-- opzione 1 -->
-        <!-- <span>Actors: {{searchList[index].actor0}}</span>
-        <span>{{searchList[index].actor1}}</span>
-        <span>{{searchList[index].actor2}}</span>
-        <span>{{searchList[index].actor3}}</span>
-        <span>{{searchList[index].actor4}}</span> -->
+       
+        <span v-for="(item, index) in movie.actors" :key="index">
+          {{item}}</span>
         <!-- /opzione 1 -->
-          <span v-for="(item, index) in movie.actor" :key="index">
+          <!-- <span v-for="(item, index) in movie.actor" :key="index">
             {{item}}
-          </span>
+          </span> -->
         
         <!-- <span v-for="(actor, index) in actorName" :key="index">{{actor}}</span> -->
 
