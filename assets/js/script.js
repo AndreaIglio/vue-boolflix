@@ -5,6 +5,7 @@ let app = new Vue({
     searchList: [],
     imageUrl: "https://image.tmdb.org/t/p/w342",
     castListName: [],
+    genreMovie: [],
   },
   methods: {
     search: function () {
@@ -133,6 +134,17 @@ let app = new Vue({
 
         console.log(this.searchList);
       // console.log(this.searchList);
+
+
+      axios.get(
+        `https://api.themoviedb.org/3/genre/movie/list?api_key=ddf88c3ce2b6d4e123fdc23f9bae3d52&language=en-US`
+      ).
+      then(response => {
+        console.log(response.data.genres);
+        this.genreMovie = response.data.genres;
+        console.log(this.genreMovie);
+      })
+      ;
     },
 
   },

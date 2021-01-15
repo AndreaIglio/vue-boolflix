@@ -26,25 +26,24 @@ body{
 .column {
   flex-direction: column;
 }
-
 ::-webkit-scrollbar {
   width: 13px;
   height: 13px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(13deg, #7E7E82 14%, #2b292b 64%);
+  background: linear-gradient(13deg, #454445 14%, #262830 64%);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(13deg, #7e7e82 14%, #2b292b 64%);
+  background: linear-gradient(13deg, #454445 14%, #262830 64%);
 }
 
 ::-webkit-scrollbar-track {
   background: #ffffff;
   border-radius: 10px;
-  box-shadow: inset 7px 10px 12px #f0f0f0;
+  box-shadow: inset 7px 10px 12px #dbdbdb;
 }
 
 /* /utility */
