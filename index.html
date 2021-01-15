@@ -70,7 +70,7 @@
          </ul>
           <form class="form-inline" @submit.prevent="">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" v-model='initValue'>
-            <button class="btn btn-dark my-2 my-sm-0" @click="searchMovie()" @change='searchMovie()'>Search</button>
+            <button class="btn btn-dark my-2 my-sm-0" @click="search()" @change='search()'>Search</button>
           </form>
        </div>
      </nav>
@@ -94,17 +94,14 @@
         </div>
         <span v-if="searchList[index].overview != ''">{{ 'OVERVIEW: ' + searchList[index].overview}}</span>
 
-      <!-- opzione 1 -->
-       
-        <span v-for="(item, index) in movie.actors" :key="index">
-          {{item}}</span>
-        <!-- /opzione 1 -->
-          <!-- <span v-for="(item, index) in movie.actor" :key="index">
-            {{item}}
-          </span> -->
-        
-        <!-- <span v-for="(actor, index) in actorName" :key="index">{{actor}}</span> -->
 
+        <!-- Milestone 5 -->
+        <!-- actors name -->
+       <div class="actors flex column">
+         <span v-for="(item, index) in movie.actors" :key="index">
+           {{item}}</span>
+       </div>
+       
       </div>
 
     </main>

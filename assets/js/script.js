@@ -3,21 +3,18 @@ let app = new Vue({
   data: {
     initValue: "",
     searchList: [],
-
     imageUrl: "https://image.tmdb.org/t/p/w342",
     castListName: [],
   },
   methods: {
-      
-    searchMovie: function() {
-
-
-    
+    search: function () {
       axios
         .get(
           `https://api.themoviedb.org/3/search/movie?api_key=ddf88c3ce2b6d4e123fdc23f9bae3d52&language=en-US&&query=${this.initValue}&page=1&include_adult=false`
         )
         .then((response) => {
+        
+
           // Milestone 1,2 (add stars to show the vote_average)
 
           // I bind to our searchList the response from the database.
@@ -39,36 +36,36 @@ let app = new Vue({
             let coverImg = element.poster_path;
             element.poster_path = `${this.imageUrl}${coverImg}`;
 
-            let cast = {};
             // Milestone 5
-            
+            // We request the whole cast by element id, then we create a new object cast to store the data of the first 5 actors name.then we need to use the Vue.set property to be able to add the object to an element property that we call 'actors'
+
             axios
               .get(
                 `https://api.themoviedb.org/3/movie/${element.id}/credits?api_key=ddf88c3ce2b6d4e123fdc23f9bae3d52&language=en-US`
               )
               .then((response) => {
+                let cast = {};
 
                 // console.log(response.data.cast);
                 let actorMovieName = response.data.cast.slice(0, 5);
 
-
                 for (let i = 0; i < actorMovieName.length; i++) {
                   // console.log(actorMovieName[i].name);
-                  Vue.set(cast, i, actorMovieName[i].name)
+                  Vue.set(cast, i, actorMovieName[i].name);
                 }
 
-              //  console.log(cast);
-               Vue.set(element, 'actors', cast);
-                      
+                //  console.log(cast);
+                Vue.set(element, "actors", cast);
               });
-              
-           
-              // console.log(this.searchList);
-              // let searchListParsed = JSON.parse(JSON.stringify(this.searchList));
-              // console.log(searchListParsed);
+            // console.log(this.searchList);
+            // let searchListParsed = JSON.parse(JSON.stringify(this.searchList));
+            // console.log(searchListParsed);
 
+            // console.log(element.genre_ids);
 
+         
           });
+
         });
 
       // Milestone 2 (add tv shows to the list)
@@ -81,42 +78,39 @@ let app = new Vue({
           //   console.log(response.data.results);
           let tvShows = response.data.results;
 
-          
-
           // console.log(tvShows);
           tvShows.forEach((element) => {
-
-
             // Milestone 3
             // i create a variable to assign the value of poster_path property, then i assign to the element.poster_path the value of the standardize imageUrl + the element.poster_path value
 
             let coverImg = element.poster_path;
             element.poster_path = `${this.imageUrl}${coverImg}`;
 
-            console.log(element);
+            // console.log(element);
+
+            // Milestone 5
+            // We request the whole cast by element id, then we create a new object cast to store the data of the first 5 actors name.then we need to use the Vue.set property to be able to add the object to an element property that we call 'actors'
 
             let tvShowCast = {};
 
-            axios.get(
-              `https://api.themoviedb.org/3/tv/${element.id}/credits?api_key=ddf88c3ce2b6d4e123fdc23f9bae3d52&language=en-US`
-            )
-            .then(response => {
-              // console.log(response.data.cast);
+            axios
+              .get(
+                `https://api.themoviedb.org/3/tv/${element.id}/credits?api_key=ddf88c3ce2b6d4e123fdc23f9bae3d52&language=en-US`
+              )
+              .then((response) => {
+                // console.log(response.data.cast);
 
-              let actorTvShowName = response.data.cast.slice(0,5);
-              // console.log(actorTvShowName);
+                let actorTvShowName = response.data.cast.slice(0, 5);
+                // console.log(actorTvShowName);
 
-              for(let i=0 ; i< actorTvShowName.length; i++){
-                // console.log(actorTvShowName[i].name);
-                Vue.set(tvShowCast, i, actorTvShowName[i].name);
-              }
+                for (let i = 0; i < actorTvShowName.length; i++) {
+                  // console.log(actorTvShowName[i].name);
+                  Vue.set(tvShowCast, i, actorTvShowName[i].name);
+                }
 
-              console.log(tvShowCast);
-              
+                //  console.log(tvShowCast);
+              });
 
-            });
-            
-            
             // console.log(element);
             //Push new objects into the array, not to get the error i need already to push them with the standard proprierties of searchList[], otherway it reminds as that the array length has some error
 
@@ -137,9 +131,9 @@ let app = new Vue({
           //   console.log(this.searchList);
         });
 
-    // console.log(this.searchList);
-
+        console.log(this.searchList);
+      // console.log(this.searchList);
     },
+
   },
-  
 });
