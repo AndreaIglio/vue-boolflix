@@ -6,26 +6,37 @@ let app = new Vue({
     imageUrl: "https://image.tmdb.org/t/p/w342",
     castListName: [],
     genreMovie: [],
+    genreTvShow: [],
   },
   methods: {
     search: function () {
-      // GenreMovie
+      // GenreMovie list of all genres
       axios
         .get(
           `https://api.themoviedb.org/3/genre/movie/list?api_key=ddf88c3ce2b6d4e123fdc23f9bae3d52&language=en-US`
         )
         .then((response) => {
-          console.log(response.data.genres);
+          // console.log(response.data.genres);
           this.genreMovie = response.data.genres;
-          console.log(this.genreMovie);
+          // console.log(this.genreMovie);
         });
-
       // /GenreMovie
 
+      //TvSerieGenre
+      axios
+        .get(
+          `https://api.themoviedb.org/3/genre/tv/list?api_key=ddf88c3ce2b6d4e123fdc23f9bae3d52&language=en-US`
+        )
+        .then((response) => {
+          // console.log(response.data.genres);
+          this.genreTvShow = response.data.genres;
+          // console.log(this.genreTvShow);
+        });
+        // /TvSerieGenre
 
 
 
-      // Movie 
+      //Get all Movies
 
       axios
         .get(
@@ -53,7 +64,8 @@ let app = new Vue({
             let coverImg = element.poster_path;
             element.poster_path = `${this.imageUrl}${coverImg}`;
 
-            // Milestone 5
+            // MILESTONE 5 ADD ACTORS AND GENRE
+
             // We request the whole cast by element id, then we create a new object cast to store the data of the first 5 actors name.then we need to use the Vue.set property to be able to add the object to an element property that we call 'actors'
 
             axios
@@ -82,34 +94,36 @@ let app = new Vue({
             console.log(element);
             console.log(element.genre_ids);
 
-            for(let v=0; v< this.genreMovie.length; v++){
+            let genreNames = [];
 
-            //  console.log(this.genreMovie[v].name);
-            //  console.log(this.genreMovie[v].id);
+            for (let v = 0; v < this.genreMovie.length; v++) {
+              //  console.log(this.genreMovie[v].name);
+              //  console.log(this.genreMovie[v].id);
 
-             for(let u=0; u < element.genre_ids.length; u++){
-              //  console.log(element.genre_ids[u]);
-               if(element.genre_ids[u] == this.genreMovie[v].id){
+              for (let u = 0; u < element.genre_ids.length; u++) {
                 //  console.log(element.genre_ids[u]);
-                
-                //QUESTO LOG SOTTO E' IL NOME DEI GENERI CHE CORRISPONDONO NELLA LSITA DI TUTTI I GENERI
-                
-                //QUESTO VALORE SARA' IL VALORE CHE DEVO STAMPARE SOTTO FORMA DI PROPRIETA' GENERE1, GENERE2 al nostro element!!!
-                console.log(this.genreMovie[v].name);
-               }
-               
-             }
+                if (element.genre_ids[u] == this.genreMovie[v].id) {
+                  //  console.log(element.genre_ids[u]);
 
+                  //QUESTO LOG SOTTO E' IL NOME DEI GENERI CHE CORRISPONDONO NELLA LSITA DI TUTTI I GENERI
+
+                  //QUESTO VALORE SARA' IL VALORE CHE DEVO STAMPARE SOTTO FORMA DI PROPRIETA' GENERE1, GENERE2 al nostro element!!!
+                  // console.log(this.genreMovie[v].name);
+                  let genreName = this.genreMovie[v].name;
+
+                  genreNames.push(genreName);
+
+                  console.log(genreName);
+                }
+                Vue.set(element, "genre", genreNames);
+              }
             }
 
-
+            console.log(element);
           });
-
         });
 
-        // /Movie
-
-
+      // /Movie
 
       //TvShow
 
@@ -170,12 +184,15 @@ let app = new Vue({
               max_vote: 5,
               actors: tvShowCast,
             });
+
+            
+
           });
 
           //   console.log(this.searchList);
         });
 
-      // /TvShow 
+      // /TvShow
       console.log(this.searchList);
       // console.log(this.searchList);
     },

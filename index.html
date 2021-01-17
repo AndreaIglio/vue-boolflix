@@ -98,8 +98,15 @@
         <!-- Milestone 5 -->
         <!-- actors name -->
        <div class="actors flex column">
-         <span v-for="(item, index) in movie.actors" :key="index">
-           {{item}}</span>
+         <span v-for="(actor, index) in movie.actors" :key="index">
+           {{actor}}</span>
+       </div>
+
+       <!-- genres name -->
+       <div class="genres flex column">
+         <span v-for="(genre, index) in movie.genre">
+           {{genre}}
+         </span>
        </div>
        
       </div>
