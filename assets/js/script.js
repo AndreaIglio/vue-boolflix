@@ -7,34 +7,10 @@ let app = new Vue({
     castListName: [],
     genreMovie: [],
     genreTvShow: [],
+    genre: ['All'],
   },
   methods: {
-    search: function () {
-      // GenreMovie list of all genres
-      axios
-        .get(
-          `https://api.themoviedb.org/3/genre/movie/list?api_key=ddf88c3ce2b6d4e123fdc23f9bae3d52&language=en-US`
-        )
-        .then((response) => {
-          // console.log(response.data.genres);
-          this.genreMovie = response.data.genres;
-          // console.log(this.genreMovie);
-        });
-      // /GenreMovie
-
-      //TvSerieGenre
-      axios
-        .get(
-          `https://api.themoviedb.org/3/genre/tv/list?api_key=ddf88c3ce2b6d4e123fdc23f9bae3d52&language=en-US`
-        )
-        .then((response) => {
-          // console.log(response.data.genres);
-          this.genreTvShow = response.data.genres;
-          // console.log(this.genreTvShow);
-        });
-        // /TvSerieGenre
-
-
+    searchAll: function () {
 
       //Get all Movies
 
@@ -89,10 +65,8 @@ let app = new Vue({
             // console.log(this.searchList);
             // let searchListParsed = JSON.parse(JSON.stringify(this.searchList));
             // console.log(searchListParsed);
-
+            // console.log(element);
             // console.log(element.genre_ids);
-            console.log(element);
-            console.log(element.genre_ids);
 
             let genreNames = [];
 
@@ -105,7 +79,7 @@ let app = new Vue({
                 if (element.genre_ids[u] == this.genreMovie[v].id) {
                   //  console.log(element.genre_ids[u]);
 
-                  //QUESTO LOG SOTTO E' IL NOME DEI GENERI CHE CORRISPONDONO NELLA LSITA DI TUTTI I GENERI
+                  //QUESTO LOG SOTTO E' IL NOME DEI GENERI CHE CORRISPONDONO NELLA LISTA DI TUTTI I GENERI
 
                   //QUESTO VALORE SARA' IL VALORE CHE DEVO STAMPARE SOTTO FORMA DI PROPRIETA' GENERE1, GENERE2 al nostro element!!!
                   // console.log(this.genreMovie[v].name);
@@ -169,29 +143,23 @@ let app = new Vue({
                 //  console.log(tvShowCast);
               });
 
+            let genreTvShowNames = [];
 
-              let genreTvShowNames =[];
+            for (let i = 0; i < this.genreTvShow.length; i++) {
+              for (let p = 0; p < element.genre_ids.length; p++) {
+                if (element.genre_ids[p] == this.genreTvShow[i].id) {
+                  // console.log(element.genre_ids);
+                  // console.log(this.genreTvShow[i].name);
 
-
-              for(let i = 0; i < this.genreTvShow.length; i++){
-
-                for(let p = 0; p < element.genre_ids.length; p++){
-
-                  if(element.genre_ids[p] == this.genreTvShow[i].id){
-                    // console.log(element.genre_ids);
-                    // console.log(this.genreTvShow[i].name);
-
-                    let genreTvShowName = this.genreTvShow[i].name;
-                    genreTvShowNames.push(genreTvShowName);
-                  }
+                  let genreTvShowName = this.genreTvShow[i].name;
+                  genreTvShowNames.push(genreTvShowName);
                 }
               }
+            }
 
-                console.log(element);
-                // console.log(genreTvShowNames);
-                Vue.set(element, "genre", genreTvShowNames);
-
-
+            console.log(element);
+            // console.log(genreTvShowNames);
+            Vue.set(element, "genre", genreTvShowNames);
 
             // console.log(element);
             //Push new objects into the array, not to get the error i need already to push them with the standard proprierties of searchList[], otherway it reminds as that the array length has some error
@@ -210,11 +178,6 @@ let app = new Vue({
               max_vote: 5,
               actors: tvShowCast,
             });
-
-            
-
-            
-
           });
 
           //   console.log(this.searchList);
@@ -223,7 +186,45 @@ let app = new Vue({
       // /TvShow
       console.log(this.searchList);
       // console.log(this.searchList);
+      this.initValue = '';
     },
 
   },
+
+  created() {
+    // GenreMovie list of all genres
+    axios
+      .get(
+        `https://api.themoviedb.org/3/genre/movie/list?api_key=ddf88c3ce2b6d4e123fdc23f9bae3d52&language=en-US`
+      )
+      .then((response) => {
+        // console.log(response.data.genres);
+        this.genreMovie = response.data.genres;
+        this.genreMovie.forEach((element) => {
+          this.genre.push(element.name);
+        });
+
+        // console.log(this.genreMovie);
+      });
+    // /GenreMovie
+
+    //TvSerieGenre
+    axios
+      .get(
+        `https://api.themoviedb.org/3/genre/tv/list?api_key=ddf88c3ce2b6d4e123fdc23f9bae3d52&language=en-US`
+      )
+      .then((response) => {
+        // console.log(response.data.genres);
+        this.genreTvShow = response.data.genres;
+
+        this.genreTvShow.forEach((element) => {
+          this.genre.push(element.name);
+        });
+      });
+    // /TvSerieGenre
+  },
+  
+   
+
+
 });
