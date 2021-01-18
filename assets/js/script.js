@@ -169,12 +169,38 @@ let app = new Vue({
                 //  console.log(tvShowCast);
               });
 
+
+              let genreTvShowNames =[];
+
+
+              for(let i = 0; i < this.genreTvShow.length; i++){
+
+                for(let p = 0; p < element.genre_ids.length; p++){
+
+                  if(element.genre_ids[p] == this.genreTvShow[i].id){
+                    // console.log(element.genre_ids);
+                    // console.log(this.genreTvShow[i].name);
+
+                    let genreTvShowName = this.genreTvShow[i].name;
+                    genreTvShowNames.push(genreTvShowName);
+                  }
+                }
+              }
+
+                console.log(element);
+                // console.log(genreTvShowNames);
+                Vue.set(element, "genre", genreTvShowNames);
+
+
+
             // console.log(element);
             //Push new objects into the array, not to get the error i need already to push them with the standard proprierties of searchList[], otherway it reminds as that the array length has some error
 
             // console.log(element);
             this.searchList.push({
               title: element.name,
+              genre: element.genre,
+              genre_ids: element.genre_ids,
               original_title: element.original_name,
               original_language: element.original_language,
               type: "Tv show",
@@ -184,6 +210,8 @@ let app = new Vue({
               max_vote: 5,
               actors: tvShowCast,
             });
+
+            
 
             
 
